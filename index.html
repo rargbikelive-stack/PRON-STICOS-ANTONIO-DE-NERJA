@@ -3,258 +3,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071426">
-<title>IA BET PROT</title>
+<title>IA BET PRO</title>
 
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- background:#071426;
- color:#f4f7ff;
- font-family:Arial,sans-serif;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#08111f;
+  color:white;
 }
 header{
- background:linear-gradient(120deg,#102d50,#071426);
- padding:25px 18px;
- text-align:center;
- border-bottom:2px solid #19d69a;
+  background:#101e32;
+  padding:22px;
+  text-align:center;
+  border-bottom:2px solid #00d69a;
 }
-.logo{font-size:32px;font-weight:900;color:#20e0a2}
-header p{color:#a9bbd1;margin:8px 0 0}
-main{max-width:850px;margin:auto;padding:16px}
+header h1{color:#00e6a0;margin:0}
+header p{color:#b9c9d9}
+.container{max-width:900px;margin:auto;padding:18px}
 .card{
- background:#10223b;
- border:1px solid #263e5d;
- border-radius:15px;
- padding:18px;
- margin-bottom:16px;
+  background:#14243a;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:18px;
+  border:1px solid #29415e;
 }
-h2{font-size:19px;margin:0 0 16px;color:#20e0a2}
-label{display:block;color:#bdcbe0;font-size:13px;margin:13px 0 6px}
+h2{color:#00e6a0;font-size:20px}
+label{display:block;margin-top:14px;color:#cbd8e6}
 input{
- width:100%;padding:13px;border-radius:9px;
- border:1px solid #38516e;background:#08182c;
- color:white;font-size:16px;
+  width:100%;
+  padding:13px;
+  margin-top:7px;
+  border-radius:8px;
+  border:1px solid #49617c;
+  background:#091729;
+  color:white;
+  font-size:16px;
 }
 button{
- width:100%;padding:15px;border:0;border-radius:10px;
- background:#16c98b;color:#061b19;
- font-size:16px;font-weight:bold;cursor:pointer;
- margin-top:15px;
+  width:100%;
+  padding:15px;
+  margin-top:20px;
+  border:0;
+  border-radius:9px;
+  background:#00d69a;
+  color:#071b16;
+  font-weight:bold;
+  font-size:17px;
+  cursor:pointer;
 }
-button:hover{background:#42e5ac}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.result{
- background:#091a30;border-radius:10px;
- padding:14px;text-align:center;
-}
-.result strong{display:block;font-size:25px;color:#20e0a2;margin-top:8px}
-.small{font-size:12px;color:#a9bbd1}
+button:hover{background:#00f5b0}
+.resultado{display:none}
 .score{
- display:flex;justify-content:space-between;
- padding:12px;border-bottom:1px solid #263e5d;
+  text-align:center;
+  font-size:42px;
+  color:#00e6a0;
+  font-weight:bold;
+  padding:15px;
 }
-.score strong{color:#20e0a2}
-.tag{color:#20e0a2;font-weight:bold}
-.hidden{display:none}
-footer{text-align:center;padding:20px;color:#8498b1;font-size:12px}
-.error{color:#ff8585;font-size:13px}
+.prob{
+  background:#091729;
+  padding:12px;
+  border-radius:8px;
+  margin:9px 0;
+}
+.bar{
+  height:9px;
+  background:#263c54;
+  border-radius:10px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  background:#00d69a;
+}
+.small{font-size:12px;color:#aebdd0}
+footer{text-align:center;color:#8295aa;padding:20px}
 </style>
 </head>
 
 <body>
+
 <header>
- <div class="logo">IA-BET-PROT</div>
- <p>Inteligencia estadística para pronósticos deportivos</p>
+<h1>⚽ IA BET PRO</h1>
+<p>Inteligencia estadística para pronósticos de fútbol</p>
 </header>
 
-<main>
+<div class="container">
 
-<section class="card">
- <h2>⚽ Analizar partido</h2>
+<div class="card">
+<h2>📊 Introducir partido</h2>
 
- <label>Equipo local</label>
- <input id="home" placeholder="Ejemplo: Real Madrid">
+<label>Equipo local</label>
+<input id="local" placeholder="Ejemplo: Real Madrid">
 
- <label>Equipo visitante</label>
- <input id="away" placeholder="Ejemplo: Barcelona">
+<label>Equipo visitante</label>
+<input id="visitante" placeholder="Ejemplo: Barcelona">
 
- <div class="grid">
-  <div>
-   <label>Goles esperados local (λ)</label>
-   <input id="lh" type="number" min="0.05" max="8" step="0.05" value="1.65">
-  </div>
-  <div>
-   <label>Goles esperados visitante (λ)</label>
-   <input id="la" type="number" min="0.05" max="8" step="0.05" value="1.10">
-  </div>
- </div>
+<label>Goles marcados por el local por partido</label>
+<input id="gl" type="number" min="0" max="10" step="0.1" value="1.6">
 
- <button onclick="analizar()">ANALIZAR CON IA BET PROT</button>
- <p id="error" class="error"></p>
-</section>
+<label>Goles encajados por el local por partido</label>
+<input id="el" type="number" min="0" max="10" step="0.1" value="1">
 
-<section id="resultados" class="hidden">
+<label>Goles marcados por el visitante por partido</label>
+<input id="gv" type="number" min="0" max="10" step="0.1" value="1.2">
 
- <section class="card">
-  <h2>📊 Probabilidades 1X2</h2>
-  <div class="grid">
-   <div class="result">
-    <span id="localName">Local</span>
-    <strong id="p1">0%</strong>
-    <span class="small">Victoria local</span>
-   </div>
-   <div class="result">
-    <span id="awayName">Visitante</span>
-    <strong id="p2">0%</strong>
-    <span class="small">Victoria visitante</span>
-   </div>
-   <div class="result" style="grid-column:1/3">
-    EMPATE
-    <strong id="px">0%</strong>
-   </div>
-  </div>
- </section>
+<label>Goles encajados por el visitante por partido</label>
+<input id="ev" type="number" min="0" max="10" step="0.1" value="1.3">
 
- <section class="card">
-  <h2>🎯 Resultados exactos más probables</h2>
-  <div id="scores"></div>
- </section>
+<button onclick="analizar()">🔍 ANALIZAR PARTIDO</button>
+</div>
 
- <section class="card">
-  <h2>⚽ Predicción de goles</h2>
-  <div class="grid">
-   <div class="result">Más de 1,5 goles<strong id="o15">0%</strong></div>
-   <div class="result">Más de 2,5 goles<strong id="o25">0%</strong></div>
-   <div class="result">Más de 3,5 goles<strong id="o35">0%</strong></div>
-   <div class="result">Ambos marcan<strong id="btts">0%</strong></div>
-  </div>
- </section>
+<div class="card resultado" id="resultados">
 
- <section class="card">
-  <h2>🧠 Informe estadístico</h2>
-  <p id="report"></p>
-  <p class="small">Las probabilidades son estimaciones matemáticas, no garantías de resultado.</p>
- </section>
+<h2>🤖 Resultado del análisis</h2>
 
-</section>
+<div id="nombres"></div>
 
-<section class="card">
- <h2>ℹ️ Cómo funciona</h2>
- <p class="small">
- Esta versión utiliza distribución de Poisson para estimar marcadores
- y probabilidades a partir de los goles esperados de cada equipo.
- Para mejorar el análisis se necesitarán estadísticas históricas,
- alineaciones, lesiones y datos actualizados.
- </p>
-</section>
+<div class="score" id="marcador"></div>
 
-</main>
+<div id="ganador"></div>
+
+<h2>Probabilidades estimadas</h2>
+
+<div id="probabilidades"></div>
+
+<h2>⚽ Marcadores exactos más probables</h2>
+<div id="scores"></div>
+
+<div class="prob">
+<strong>Goles esperados</strong>
+<p id="goles"></p>
+</div>
+
+<p class="small">
+Modelo estadístico basado en los datos introducidos y distribución de Poisson.
+Los porcentajes son estimaciones, no garantías de resultados.
+</p>
+
+</div>
+
+<div class="card">
+<h2>📌 Cómo funciona IA BET PRO</h2>
+<p>1. Introduce los nombres de los equipos.</p>
+<p>2. Introduce sus estadísticas de goles.</p>
+<p>3. Pulsa analizar partido.</p>
+<p>4. Consulta las probabilidades y los marcadores estimados.</p>
+</div>
+
+</div>
 
 <footer>
- IA-BET-PROT © 2026 · Sistema de análisis estadístico
+IA BET PRO © 2026 | Sistema de análisis estadístico
 </footer>
 
 <script>
-function factorial(n){
- let r=1;
- for(let i=2;i<=n;i++)r*=i;
- return r;
-}
 
 function poisson(k,lambda){
- return Math.exp(-lambda)*Math.pow(lambda,k)/factorial(k);
-}
-
-function porcentaje(x){
- return (x*100).toFixed(1)+"%";
+  let factorial=1;
+  for(let i=1;i<=k;i++) factorial*=i;
+  return Math.exp(-lambda)*Math.pow(lambda,k)/factorial;
 }
 
 function analizar(){
- const home=document.getElementById("home").value.trim();
- const away=document.getElementById("away").value.trim();
- const lh=Number(document.getElementById("lh").value);
- const la=Number(document.getElementById("la").value);
- const error=document.getElementById("error");
 
- error.textContent="";
+  const local=document.getElementById("local").value.trim();
+  const visitante=document.getElementById("visitante").value.trim();
 
- if(!home || !away){
-  error.textContent="Introduce los nombres de los dos equipos.";
-  return;
- }
-
- if(home.toLowerCase()===away.toLowerCase()){
-  error.textContent="Los equipos deben ser diferentes.";
-  return;
- }
-
- if(!Number.isFinite(lh)||!Number.isFinite(la)||lh<=0||la<=0||lh>8||la>8){
-  error.textContent="Los goles esperados deben estar entre 0,05 y 8.";
-  return;
- }
-
- let p1=0,px=0,p2=0;
- let over15=0,over25=0,over35=0,btts=0;
- let scores=[];
-
- for(let h=0;h<=10;h++){
-  for(let a=0;a<=10;a++){
-   const p=poisson(h,lh)*poisson(a,la);
-   scores.push({h,a,p});
-
-   if(h>a)p1+=p;
-   else if(h===a)px+=p;
-   else p2+=p;
-
-   if(h+a>1)over15+=p;
-   if(h+a>2)over25+=p;
-   if(h+a>3)over35+=p;
-   if(h>0&&a>0)btts+=p;
+  if(!local || !visitante){
+    alert("Introduce los dos equipos.");
+    return;
   }
- }
 
- // Normalización para compensar la probabilidad residual
- // de marcadores superiores al límite calculado.
- const total=p1+px+p2;
- p1/=total;px/=total;p2/=total;
- over15/=total;over25/=total;over35/=total;btts/=total;
+  const gl=Number(document.getElementById("gl").value);
+  const el=Number(document.getElementById("el").value);
+  const gv=Number(document.getElementById("gv").value);
+  const ev=Number(document.getElementById("ev").value);
 
- scores.sort((x,y)=>y.p-x.p);
+  if([gl,el,gv,ev].some(x=>!Number.isFinite(x)||x<0||x>10)){
+    alert("Introduce estadísticas válidas entre 0 y 10.");
+    return;
+  }
 
- document.getElementById("localName").textContent=home;
- document.getElementById("awayName").textContent=away;
- document.getElementById("p1").textContent=porcentaje(p1);
- document.getElementById("px").textContent=porcentaje(px);
- document.getElementById("p2").textContent=porcentaje(p2);
- document.getElementById("o15").textContent=porcentaje(over15);
- document.getElementById("o25").textContent=porcentaje(over25);
- document.getElementById("o35").textContent=porcentaje(over35);
- document.getElementById("btts").textContent=porcentaje(btts);
+  // Estimación de goles esperados
+  const lambdaL=(gl+ev)/2;
+  const lambdaV=(gv+el)/2;
 
- const scoresHTML=scores.slice(0,5).map(s=>
-  `<div class="score">
-   <span>${home} ${s.h} - ${s.a} ${away}</span>
-   <strong>${porcentaje(s.p)}</strong>
-  </div>`
- ).join("");
+  let victoria=0;
+  let empate=0;
+  let derrota=0;
+  let marcadores=[];
 
- document.getElementById("scores").innerHTML=scoresHTML;
+  for(let i=0;i<=8;i++){
+    for(let j=0;j<=8;j++){
 
- const winner=p1>p2&&p1>px?home:
-              p2>p1&&p2>px?away:"Empate";
+      const prob=poisson(i,lambdaL)*poisson(j,lambdaV);
 
- document.getElementById("report").innerHTML=
-  `<span class="tag">Mayor probabilidad: ${winner}</span><br><br>
-  Goles esperados: ${home} ${lh.toFixed(2)} y
-  ${away} ${la.toFixed(2)}.<br><br>
-  La probabilidad estimada de ambos equipos marcando es
-  ${porcentaje(btts)}.`;
+      marcadores.push({
+        local:i,
+        visitante:j,
+        prob:prob
+      });
 
- document.getElementById("resultados").classList.remove("hidden");
- document.getElementById("resultados").scrollIntoView({behavior:"smooth"});
+      if(i>j) victoria+=prob;
+      else if(i===j) empate+=prob;
+      else derrota+=prob;
+    }
+  }
+
+  const total=victoria+empate+derrota;
+
+  victoria/=total;
+  empate/=total;
+  derrota/=total;
+
+  marcadores.sort((a,b)=>b.prob-a.prob);
+
+  const mejor=marcadores[0];
+
+  document.getElementById("nombres").innerHTML=
+    "<p><strong>"+local+"</strong> vs <strong>"+visitante+"</strong></p>";
+
+  document.getElementById("marcador").textContent=
+    mejor.local+" - "+mejor.visitante;
+
+  let ganador;
+
+  if(victoria>empate && victoria>derrota)
+    ganador="Mayor probabilidad: victoria de "+local;
+  else if(derrota>victoria && derrota>empate)
+    ganador="Mayor probabilidad: victoria de "+visitante;
+  else
+    ganador="Mayor probabilidad: empate";
+
+  document.getElementById("ganador").innerHTML=
+    "<div class='prob'>"+ganador+"</div>";
+
+  const datos=[
+    {nombre:"Victoria local",valor:victoria},
+    {nombre:"Empate",valor:empate},
+    {nombre:"Victoria visitante",valor:derrota}
+  ];
+
+  document.getElementById("probabilidades").innerHTML=
+    datos.map(d=>`
+      <div class="prob">
+        <strong>${d.nombre}: ${(d.valor*100).toFixed(2)}%</strong>
+        <div class="bar">
+          <div class="fill" style="width:${d.valor*100}%"></div>
+        </div>
+      </div>
+    `).join("");
+
+  document.getElementById("scores").innerHTML=
+    marcadores.slice(0,5).map(m=>`
+      <div class="prob">
+        <strong>${m.local} - ${m.visitante}</strong>
+        <span style="float:right">
+        ${(m.prob*100).toFixed(2)}%
+        </span>
+      </div>
+    `).join("");
+
+  document.getElementById("goles").textContent=
+    local+": "+lambdaL.toFixed(2)+
+    " | "+visitante+": "+lambdaV.toFixed(2);
+
+  document.getElementById("resultados").style.display="block";
+
+  document.getElementById("resultados").scrollIntoView({
+    behavior:"smooth"
+  });
 }
+
 </script>
+
 </body>
 </html>
